@@ -1,0 +1,6 @@
+node_modules/
+ncert/
+data/IDToPath.json
+pdfs/
+data/frequency.json
+data/pathToID.json
