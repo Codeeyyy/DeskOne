@@ -21,6 +21,9 @@ const __dirname = path.dirname(__filename);
 })()
 
 export function search(prompt) {
+
+  let score = {}
+  let distinctWords = {}
   let tokens = tokenizer(prompt)
 
   let frequency = JSON.parse(fs.readFileSync(path.join(__dirname, "data", "frequency.json")))
@@ -30,10 +33,9 @@ export function search(prompt) {
   for (const t of tokens) {
     if (frequency[t]) {
       let results = Object.keys(frequency[t]).map(docID => {
-        return {
-          path: IDtoPath[docID],
-          score: frequency[t][docID]
-        }
+        score[docID] = (score[docID] || 0) + frequency[t][docID]
+        distinctWords[docID] = (distinctWords[docID] || 0) + 1
+         
       })
 
       let sortedResults = results ? results.toSorted((a, b) => b.score - a.score).slice(0, 3) : []

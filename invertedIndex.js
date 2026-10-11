@@ -69,7 +69,7 @@
   
     const sectionPattern = /\n(?=\d+\.\d+(?:\.\d+)?\s+[A-Za-z])/g;
     const rawSections = cleanText.split(sectionPattern);
-
+    
     rawSections.forEach((chunk, index) => {
         const text = chunk.trim();
         if (text.length < 100) return; 
@@ -90,6 +90,8 @@
 
         add(fullPath , text)
       });
+
+    
     
   }
   
